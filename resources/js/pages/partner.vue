@@ -2,7 +2,7 @@
   <page-title>外部委託先詳細</page-title>
   <div class="tw-flex tw-gap-5">
     <div class="tw-w-1/2">
-      <infosCard></infosCard>
+      <infosCard :id="props.id"></infosCard>
     </div>
     <div class="tw-w-1/2">
       <projectsCard></projectsCard>

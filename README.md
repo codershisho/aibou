@@ -1,3 +1,26 @@
+## dev
+
+### migration
+
+```
+Laravelで下記カラムを持つマイグレーションファイルを作成。
+カラムにコメントをつけて。
+カラム名は物理名に変換して。
+[テーブル名]
+partners
+
+[カラム名]
+id
+名称:string
+組織区分:tinyint
+基本契約フラグ:tinyint
+担当者名:string
+連絡先:string
+レーティング:int
+得意分野:text
+メモ:text
+```
+
 ## libs
 
 ### vuetify

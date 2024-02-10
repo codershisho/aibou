@@ -30,6 +30,7 @@
   "dependencies": {
     "@mdi/font": "^7.4.47",
     "pinia": "^2.1.7",
+    "tslib": "^2.6.2",
     "vite-plugin-vuetify": "^2.0.1"
   }
 }

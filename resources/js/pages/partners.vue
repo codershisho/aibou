@@ -5,13 +5,15 @@
       <v-card class="pa-4 bg-back-lighten-2 partner-card" :to="'/partners/' + partner.id">
         <div class="text-right">
           <v-chip variant="flat" label color="primary">
-            {{ partner.organization_kbn_name }}
+            {{ partner.organization_type_name }}
           </v-chip>
         </div>
         <div class="tw-flex tw-justify-center my-2">
           <div>
-            <v-avatar color="grey" size="60"></v-avatar>
-            <div class="tw-text-xl text-center">{{ partner.name }}</div>
+            <div class="text-center">
+              <v-avatar color="grey" size="60"></v-avatar>
+            </div>
+            <div class="tw-text-xl text-center pt-2">{{ partner.name }}</div>
           </div>
         </div>
         <div class="tw-flex tw-justify-center">
@@ -23,64 +25,15 @@
 </template>
 
 <script setup lang="ts">
-const partners = [
-  {
-    id: 1,
-    name: 'aaa',
-    organization_kbn: 1,
-    organization_kbn_name: '個人',
-    rating: 3,
-  },
-  {
-    id: 1,
-    name: 'aaa',
-    organization_kbn: 1,
-    organization_kbn_name: '個人',
-    rating: 3,
-  },
-  {
-    id: 1,
-    name: 'aaa',
-    organization_kbn: 1,
-    organization_kbn_name: '個人',
-    rating: 3,
-  },
-  {
-    id: 1,
-    name: 'aaa',
-    organization_kbn: 1,
-    organization_kbn_name: '個人',
-    rating: 3,
-  },
-  {
-    id: 1,
-    name: 'aaa',
-    organization_kbn: 1,
-    organization_kbn_name: '個人',
-    rating: 3,
-  },
-  {
-    id: 1,
-    name: 'aaa',
-    organization_kbn: 1,
-    organization_kbn_name: '個人',
-    rating: 3,
-  },
-  {
-    id: 1,
-    name: 'aaa',
-    organization_kbn: 1,
-    organization_kbn_name: '個人',
-    rating: 3,
-  },
-  {
-    id: 1,
-    name: 'aaa',
-    organization_kbn: 1,
-    organization_kbn_name: '個人',
-    rating: 3,
-  },
-];
+import { ref, onMounted } from 'vue';
+import { default as service } from '@/services/partner';
+import { IPartner } from '@/types/partner';
+
+const partners = ref<IPartner[] | null>();
+
+onMounted(async () => {
+  partners.value = await service.index();
+});
 </script>
 
 <style scoped>

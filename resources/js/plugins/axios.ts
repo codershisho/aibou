@@ -3,7 +3,7 @@ import { App, Plugin } from 'vue';
 
 const axiosPlugin = {
   install(app: App, options: any) {
-    axios.defaults.baseURL = 'http://localhost';
+    axios.defaults.baseURL = 'http://localhost/api/aibou';
 
     // request
     axios.interceptors.request.use((config: any) => {
@@ -15,7 +15,7 @@ const axiosPlugin = {
     // response
     axios.interceptors.response.use(
       (response: any) => {
-        return response;
+        return response.data.data;
       },
       (error: any) => {
         if (error.response) {

@@ -34,6 +34,9 @@ const pinia = createPinia();
 import pageTitle from '@/components/commons/pageTitle.vue';
 import card from '@/components/commons/card.vue';
 
+import text from '@/components/ui/text.vue';
+import textarea from '@/components/ui/textarea.vue';
+
 const app = createApp(App);
 
 app.use(vuetify);
@@ -43,5 +46,8 @@ app.use(pinia);
 
 app.component('page-title', pageTitle);
 app.component('o-card', card);
+
+app.component('o-text', text);
+app.component('o-area', textarea);
 
 app.mount('#app');

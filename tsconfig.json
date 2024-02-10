@@ -18,10 +18,10 @@
             ]
         },
         "lib": [
-            "esnext",
+            "es5",
             "dom",
-            "dom.iterable",
-            "scripthost"
+            "esnext.asynciterable",
+            "es2015.promise"
         ]
     },
     "include": [
