@@ -12,7 +12,12 @@ import 'vuetify/dist/vuetify.min.css';
 import { customLight, customDark } from './theme';
 const vuetify = createVuetify({
   theme: {
-    defaultTheme: 'customLight',
+    defaultTheme: 'customDark',
+    variations: {
+      colors: ['primary', 'secondary', 'info', 'accent', 'back'],
+      lighten: 5,
+      darken: 5,
+    },
     themes: {
       customLight,
       customDark,
@@ -25,10 +30,18 @@ import AxiosPlugin from './plugins/axios';
 import { createPinia } from 'pinia';
 const pinia = createPinia();
 
+// components
+import pageTitle from '@/components/commons/pageTitle.vue';
+import card from '@/components/commons/card.vue';
+
 const app = createApp(App);
 
 app.use(vuetify);
 app.use(router);
 app.use(AxiosPlugin);
 app.use(pinia);
+
+app.component('page-title', pageTitle);
+app.component('o-card', card);
+
 app.mount('#app');

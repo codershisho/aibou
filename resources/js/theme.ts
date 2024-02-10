@@ -1,15 +1,14 @@
 export const customLight = {
   colors: {
-    primary: '#001063',
-    secondary: '#09B6FA',
-    info: '#2E95CB',
-    accent: '#1BBC9C',
-    back: '#F7F4FD',
-    textmain: '#8E8E8E',
-    tabbg: '#AAAAAA',
+    back: '#121212',
+    txt: '#dddddd',
   },
 };
 
 export const customDark = {
-  colors: {},
+  colors: {
+    primary: '#2196F3',
+    back: '#121212',
+    txt: '#dddddd',
+  },
 };
