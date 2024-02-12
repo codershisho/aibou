@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { App, Plugin } from 'vue';
+import { useAppStore } from '@/stores/app';
 
 const axiosPlugin = {
   install(app: App, options: any) {
@@ -8,16 +9,33 @@ const axiosPlugin = {
     // request
     axios.interceptors.request.use((config: any) => {
       console.log('plugins');
-
       return config;
     });
 
     // response
     axios.interceptors.response.use(
       (response: any) => {
+        if (response.data.message) {
+          const store = useAppStore();
+          store.addMessages({
+            text: response.data.message,
+            state: {
+              color: 'success',
+              timeout: 3000,
+            },
+          });
+        }
         return response.data.data;
       },
       (error: any) => {
+        const store = useAppStore();
+        store.addMessages({
+          text: 'エラー発生!',
+          state: {
+            color: 'error',
+            timeout: 3000,
+          },
+        });
         if (error.response) {
           // サーバーからのエラーレスポンスを処理します
           const status = error.response.status;

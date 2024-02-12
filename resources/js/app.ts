@@ -41,6 +41,7 @@ import btnCancel from '@/components/ui/btnCancel.vue';
 import btnSave from '@/components/ui/btnSave.vue';
 import dialog from '@/components/ui/dialog.vue';
 import auto from '@/components/ui/auto.vue';
+import snackbar from '@/components/ui/snackbar.vue';
 
 // forms
 import projectForm from '@/components/projects/projectForm.vue';
@@ -62,6 +63,7 @@ app.component('o-cancelbtn', btnCancel);
 app.component('o-savebtn', btnSave);
 app.component('o-dialog', dialog);
 app.component('o-auto', auto);
+app.component('o-snackbar', snackbar);
 
 // forms
 app.component('project-form', projectForm);
