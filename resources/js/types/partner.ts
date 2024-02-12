@@ -9,7 +9,7 @@ export interface IPartner {
   rating: number;
   specialty: string;
   memo: string;
-  created_at: string;
-  updated_at: string;
-  deleted_at: string | null;
+  created_at?: string;
+  updated_at?: string;
+  deleted_at?: string | null;
 }

@@ -12,25 +12,7 @@ class Partner extends Model
     use SoftDeletes;
 
     protected $table = 'partners'; // テーブル名
-    protected $primaryKey = 'id'; // 主キーのカラム名
-
-    protected $fillable = [
-        'name',
-        'organization_type',
-        'basic_contract_flag',
-        'contact_person',
-        'contact',
-        'rating',
-        'specialty',
-        'memo',
-    ]; // フィルアブル（代入可能）なカラム名のリスト
-
-    protected $casts = [
-        'organization_type' => 'integer',
-        'basic_contract_flag' => 'integer',
-        'rating' => 'integer',
-    ]; // キャストするデータ型を指定する
-
+    protected $guarded = ['id'];
     protected $appends = ["organization_type_name"];
 
     public function getBasicContractFlagAttribute()

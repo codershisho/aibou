@@ -1,0 +1,11 @@
+<template>
+  <v-btn
+    v-bind="$attrs"
+    color="success"
+    rounded="xl"
+    variant="flat"
+    prepend-icon="mdi:mdi-content-save-edit"
+  >
+    保存
+  </v-btn>
+</template>

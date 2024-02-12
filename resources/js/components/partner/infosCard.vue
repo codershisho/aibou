@@ -65,7 +65,7 @@ const partner = ref<IPartner>({
   name: '',
   organization_type: 0,
   organization_type_name: '',
-  basic_contract_flag: 0,
+  basic_contract_flag: false,
   contact_person: '',
   contact: '',
   rating: 0,

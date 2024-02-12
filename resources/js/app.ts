@@ -36,6 +36,14 @@ import card from '@/components/commons/card.vue';
 
 import text from '@/components/ui/text.vue';
 import textarea from '@/components/ui/textarea.vue';
+import btnNew from '@/components/ui/btnNew.vue';
+import btnCancel from '@/components/ui/btnCancel.vue';
+import btnSave from '@/components/ui/btnSave.vue';
+import dialog from '@/components/ui/dialog.vue';
+import auto from '@/components/ui/auto.vue';
+
+// forms
+import projectForm from '@/components/projects/projectForm.vue';
 
 const app = createApp(App);
 
@@ -49,5 +57,13 @@ app.component('o-card', card);
 
 app.component('o-text', text);
 app.component('o-area', textarea);
+app.component('o-newbtn', btnNew);
+app.component('o-cancelbtn', btnCancel);
+app.component('o-savebtn', btnSave);
+app.component('o-dialog', dialog);
+app.component('o-auto', auto);
+
+// forms
+app.component('project-form', projectForm);
 
 app.mount('#app');

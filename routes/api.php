@@ -1,6 +1,9 @@
 <?php
 
 use App\Http\Controllers\Api\PartnerApi;
+use App\Http\Controllers\Api\ProjectApi;
+use App\Http\Controllers\Api\ReflectionApi;
+use App\Http\Controllers\Api\WorktimeApi;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -26,6 +29,23 @@ Route::prefix('aibou')->group(function () {
         Route::post('/', [PartnerApi::class, 'store']);
         Route::put('/{id}', [PartnerApi::class, 'update']);
         Route::delete('/{id}', [PartnerApi::class, 'destroy']);
+    });
+    Route::prefix('projects')->group(function () {
+        Route::get('/', [ProjectApi::class, 'index']);
+        Route::prefix('{id}')->group(function () {
+            Route::get('/', [ProjectApi::class, 'show']);
+            Route::prefix('worktime')->group(function () {
+                Route::get('/', [WorktimeApi::class, 'show']);
+                Route::post('/', [WorktimeApi::class, 'store']);
+            });
+            Route::prefix('reflection')->group(function () {
+                Route::get('/', [ReflectionApi::class, 'show']);
+                Route::post('/', [ReflectionApi::class, 'store']);
+            });
+        });
+        Route::post('/', [ProjectApi::class, 'store']);
+        // Route::put('/{id}', [PartnerApi::class, 'update']);
+        // Route::delete('/{id}', [PartnerApi::class, 'destroy']);
     });
 });
 

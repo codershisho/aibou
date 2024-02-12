@@ -24,6 +24,7 @@ import { ref } from 'vue';
 
 const menus = [
   ['mdi-home', 'Dashboard', '/'],
-  ['mdi-account-circle-outline', 'partners', '/partners'],
+  ['mdi-account-circle-outline', 'Partners', '/partners'],
+  ['mdi-account-circle-outline', 'Projects', '/projects'],
 ];
 </script>

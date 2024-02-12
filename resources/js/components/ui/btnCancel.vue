@@ -1,0 +1,11 @@
+<template>
+  <v-btn
+    v-bind="$attrs"
+    color="grey"
+    rounded="xl"
+    variant="outlined"
+    prepend-icon="mdi:mdi-close-box"
+  >
+    キャンセル
+  </v-btn>
+</template>

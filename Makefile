@@ -6,6 +6,8 @@ db:
 du:
 	service docker start
 	docker-compose up -d
+de:
+	docker-compose exec -u root php bash
 due:
 	service docker start
 	docker-compose up -d
