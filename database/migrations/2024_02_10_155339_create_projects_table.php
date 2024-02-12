@@ -18,6 +18,7 @@ return new class extends Migration
             $table->integer('partner_id')->nullable()->comment('外部委託先ID');
             $table->string('dates')->nullable()->comment('対応期間');
             $table->integer('status')->nullable()->comment('ステータス');
+            $table->text('step')->nullable()->comment('ステップテキスト');
             $table->timestamps();
             $table->softDeletes();
         });

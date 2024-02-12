@@ -6,6 +6,6 @@
     variant="flat"
     prepend-icon="mdi:mdi-content-save-edit"
   >
-    保存
+    <slot></slot>
   </v-btn>
 </template>

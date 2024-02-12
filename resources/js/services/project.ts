@@ -11,6 +11,12 @@ const ProjectApiService = {
   store: async (params: any) => {
     return await axios.post('/projects', params);
   },
+  showStep: async (id: number) => {
+    return await axios.get(`/projects/${id}/step`);
+  },
+  step: async (id: number, params: any) => {
+    return await axios.put(`/projects/${id}/step`, params);
+  },
 };
 
 export default ProjectApiService;

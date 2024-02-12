@@ -13,36 +13,10 @@
       </div>
     </div>
     <div class="tw-w-5/6">
-      <!-- <component :is="tab" :id="props.id" /> -->
       <projectDetail v-show="tab == `projectDetail`" :id="props.id"></projectDetail>
       <worktime v-show="tab == `worktime`" :id="props.id"></worktime>
       <kpt v-show="tab == `kpt`" :id="props.id"></kpt>
     </div>
-    <!-- <v-tabs v-model="tab" color="primary">
-      <v-tab value="1">
-        <v-icon start> mdi-account-outline </v-icon>
-        案件詳細
-      </v-tab>
-      <v-tab value="2">
-        <v-icon start> mdi-file-document-multiple-outline </v-icon>
-        工数
-      </v-tab>
-      <v-tab value="3">
-        <v-icon start> mdi-file-document-multiple-outline </v-icon>
-        KPT
-      </v-tab>
-    </v-tabs>
-    <v-window class="" v-model="tab">
-      <v-window-item value="1">
-        <projectDetail :id="props.id"></projectDetail>
-      </v-window-item>
-      <v-window-item value="2">
-        <worktime :id="props.id"></worktime>
-      </v-window-item>
-      <v-window-item value="3">
-        <kpt :id="props.id"></kpt>
-      </v-window-item>
-    </v-window> -->
   </div>
 </template>
 
@@ -52,21 +26,17 @@ import projectDetail from './details.vue';
 import worktime from './worktime.vue';
 import kpt from './kpt.vue';
 
-// const components = { projectDetail: projectDetail, worktime: worktime, kpt: kpt };
-
 const props = defineProps({
   id: String,
 });
 
 const tab = ref('projectDetail');
 const tabs = ref([
-  { name: '案件詳細', icon: 'mdi-account-outline' },
+  { name: '詳細', icon: 'mdi-account-outline' },
   { name: '工数', icon: 'mdi-account-outline' },
   { name: 'KPT', icon: 'mdi-account-outline' },
 ]);
 const selectedIndex = ref(0);
-const selectedColor = ref('red');
-const defaultColor = ref('#ffffff');
 
 const changeTab = (tabIndex: number) => {
   selectedIndex.value = tabIndex;

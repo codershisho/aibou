@@ -34,6 +34,8 @@ Route::prefix('aibou')->group(function () {
         Route::get('/', [ProjectApi::class, 'index']);
         Route::prefix('{id}')->group(function () {
             Route::get('/', [ProjectApi::class, 'show']);
+            Route::get('/step', [ProjectApi::class, 'showStep']);
+            Route::put('/step', [ProjectApi::class, 'step']);
             Route::prefix('worktime')->group(function () {
                 Route::get('/', [WorktimeApi::class, 'show']);
                 Route::post('/', [WorktimeApi::class, 'store']);

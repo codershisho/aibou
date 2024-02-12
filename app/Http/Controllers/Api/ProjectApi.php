@@ -24,4 +24,17 @@ class ProjectApi extends ApiController
         $project = Project::create($request->all());
         return response()->json($project, 201);
     }
+
+    public function showStep($id)
+    {
+        $project = Project::findOrFail($id);
+        return $this->setResponse($project->step);
+    }
+
+    public function step($id, Request $request)
+    {
+        $project = Project::findOrFail($id);
+        $project->update($request->all());
+        return $this->setResponse($project, "保存しました");
+    }
 }
