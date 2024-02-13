@@ -39,10 +39,12 @@ Route::prefix('aibou')->group(function () {
             Route::prefix('worktime')->group(function () {
                 Route::get('/', [WorktimeApi::class, 'show']);
                 Route::post('/', [WorktimeApi::class, 'store']);
+                Route::put('/{worktime_id}', [WorktimeApi::class, 'update']);
             });
             Route::prefix('reflection')->group(function () {
                 Route::get('/', [ReflectionApi::class, 'show']);
                 Route::post('/', [ReflectionApi::class, 'store']);
+                Route::put('/{reflection_id}', [ReflectionApi::class, 'update']);
             });
         });
         Route::post('/', [ProjectApi::class, 'store']);

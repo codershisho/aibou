@@ -15,7 +15,14 @@ class WorktimeApi extends ApiController
 
     public function store(Request $request)
     {
-        $project = Worktime::create($request->all());
-        return response()->json($project, 201);
+        $worktime = Worktime::create($request->all());
+        return $this->setResponse($worktime, "工数登録しました");
+    }
+
+    public function update($id, $worktime_id, Request $request)
+    {
+        $worktime = Worktime::findOrFail($worktime_id);
+        $worktime->update($request->all());
+        return $this->setResponse($worktime, "工数更新しました");
     }
 }

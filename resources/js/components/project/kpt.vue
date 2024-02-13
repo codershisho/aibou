@@ -28,7 +28,7 @@ const props = defineProps({
 });
 const reflection = ref<IReflection>({
   id: 0,
-  project_id: props.id,
+  project_id: Number(props.id),
   keep: '',
   problem: '',
   try: '',
@@ -39,14 +39,20 @@ onMounted(() => {
 });
 
 const search = async () => {
-  const res = await service.show(props.id);
+  const res = await service.show(Number(props.id));
   if (res) {
-    reflection.value = await service.show(props.id);
+    reflection.value = await service.show(Number(props.id));
   }
 };
 
 const onSave = async () => {
-  await service.store(props.id, reflection.value);
+  if (reflection.value.id != 0) {
+    const updRes = await service.update(Number(props.id), reflection.value.id, reflection.value);
+    reflection.value = updRes;
+    return;
+  }
+  const insRes = await service.store(Number(props.id), reflection.value);
+  reflection.value = insRes;
 };
 </script>
 

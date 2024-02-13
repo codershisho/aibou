@@ -15,7 +15,16 @@ class ReflectionApi extends ApiController
 
     public function store(Request $request)
     {
-        $project = Reflection::create($request->all());
-        return response()->json($project, 201);
+        $reflection = Reflection::create($request->all());
+        return $this->setResponse($reflection, "振り返り登録しました");
+    }
+
+    public function update($id, $reflection_id, Request $request)
+    {
+        logger("aa");
+        logger($reflection_id);
+        $reflection = Reflection::findOrFail($reflection_id);
+        $reflection->update($request->all());
+        return $this->setResponse($reflection, "振り返り更新しました");
     }
 }

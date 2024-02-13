@@ -36,7 +36,7 @@ const props = defineProps({
 });
 const worktime = ref<IWorktime>({
   id: 0,
-  project_id: props.id,
+  project_id: Number(props.id),
   submission_work_hours: 0,
   submission_meeting_hours: 0,
   estimated_work_hours: 0,
@@ -49,14 +49,21 @@ onMounted(() => {
 });
 
 const search = async () => {
-  const res = await service.show(props.id);
+  const res = await service.show(Number(props.id));
   if (res) {
-    worktime.value = await service.show(props.id);
+    worktime.value = res;
   }
 };
 
 const onSave = async () => {
-  await service.store(props.id, worktime.value);
+  if (worktime.value.id != 0) {
+    // update
+    const updRes = await service.update(Number(props.id), worktime.value.id, worktime.value);
+    worktime.value = updRes;
+    return;
+  }
+  const insRes = await service.store(Number(props.id), worktime.value);
+  worktime.value = insRes;
 };
 </script>
 
