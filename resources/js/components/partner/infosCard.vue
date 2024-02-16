@@ -1,5 +1,8 @@
 <template>
   <o-card title="基本情報">
+    <div class="text-right mb-5">
+      <o-savebtn @click="onSave">保存する</o-savebtn>
+    </div>
     <div class="tw-flex tw-items-center tw-gap-5">
       <div class="tw-w-1/2">
         <div class="tw-text-sm py-2">委託先名称</div>
@@ -24,7 +27,7 @@
             density="compact"
             :length="5"
             :size="32"
-            :model-value="partner.rating"
+            v-model="partner.rating"
             active-color="primary"
           />
         </div>
@@ -74,8 +77,13 @@ const partner = ref<IPartner>({
 });
 
 onMounted(async () => {
-  partner.value = await service.show(props.id);
+  partner.value = await service.show(Number(props.id));
 });
+
+const onSave = async () => {
+  const res = await service.update(Number(props.id), partner.value);
+  partner.value = res;
+};
 </script>
 
 <style scoped></style>

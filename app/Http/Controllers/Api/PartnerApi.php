@@ -29,7 +29,7 @@ class PartnerApi extends ApiController
     {
         $partner = Partner::findOrFail($id);
         $partner->update($request->all());
-        return response()->json($partner);
+        return $this->setResponse($partner, '保存しました');
     }
 
     public function destroy($id)

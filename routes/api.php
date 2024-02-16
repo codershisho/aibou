@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\DocumentApi;
 use App\Http\Controllers\Api\MeetingApi;
 use App\Http\Controllers\Api\PartnerApi;
 use App\Http\Controllers\Api\ProjectApi;
@@ -26,10 +27,17 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::prefix('aibou')->group(function () {
     Route::prefix('partners')->group(function () {
         Route::get('/', [PartnerApi::class, 'index']);
-        Route::get('/{id}', [PartnerApi::class, 'show']);
         Route::post('/', [PartnerApi::class, 'store']);
-        Route::put('/{id}', [PartnerApi::class, 'update']);
-        Route::delete('/{id}', [PartnerApi::class, 'destroy']);
+        // ステップ周り
+        Route::prefix('{id}')->group(function () {
+            Route::get('/', [PartnerApi::class, 'show']);
+            Route::put('/', [PartnerApi::class, 'update']);
+            Route::delete('/', [PartnerApi::class, 'destroy']);
+            Route::prefix('documents')->group(function () {
+                Route::get('/', [DocumentApi::class, 'index']);
+                Route::post('/', [DocumentApi::class, 'upload']);
+            });
+        });
     });
     Route::prefix('projects')->group(function () {
         Route::get('/', [ProjectApi::class, 'index']);

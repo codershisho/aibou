@@ -11,7 +11,7 @@ class ProjectApi extends ApiController
 {
     public function index()
     {
-        $data = Project::all();
+        $data = Project::with(['partner'])->get();
         return $this->setResponse($data);
     }
 

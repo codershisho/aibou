@@ -27,7 +27,7 @@
   <v-divider class="my-5"></v-divider>
   <div class="tw-flex tw-gap-5 tw-justify-center">
     <o-cancelbtn class="tw-w-1/4" @click="cancel" />
-    <o-savebtn class="tw-w-1/4" @click="save" />
+    <o-savebtn class="tw-w-1/4" @click="save">保存する</o-savebtn>
   </div>
 </template>
 
@@ -43,7 +43,7 @@ const project = ref<IProject>({
   id: 0,
   code: '',
   name: '',
-  partner_id: 0,
+  partner_id: 1,
   status: 1,
   dates: '',
 });

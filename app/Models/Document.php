@@ -6,16 +6,11 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Project extends Model
+class Document extends Model
 {
     use HasFactory;
     use SoftDeletes;
 
-    protected $table = 'projects';
+    protected $table = 'documents';
     protected $guarded = ['id'];
-
-    public function partner()
-    {
-        return $this->hasOne(Partner::class, 'id', 'partner_id');
-    }
 }

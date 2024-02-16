@@ -13,3 +13,10 @@ export interface IPartner {
   updated_at?: string;
   deleted_at?: string | null;
 }
+
+export interface IDocument {
+  id: number;
+  partner_id: number;
+  basic_path: string;
+  fileName: string;
+}

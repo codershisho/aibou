@@ -5,24 +5,18 @@
       <infosCard :id="props.id"></infosCard>
     </div>
     <div class="tw-w-1/2">
-      <projectsCard></projectsCard>
+      <docsCard :id="props.id"></docsCard>
     </div>
-  </div>
-  <div class="tw-w-full pt-5">
-    <docsCard></docsCard>
   </div>
 </template>
 
 <script setup lang="ts">
 import infosCard from '@/components/partner/infosCard.vue';
-import projectsCard from '@/components/partner/projectsCard.vue';
 import docsCard from '@/components/partner/docsCard.vue';
 
 const props = defineProps({
   id: String,
 });
-
-console.log(props.id);
 </script>
 
 <style scoped></style>

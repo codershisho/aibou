@@ -24,7 +24,7 @@
       <o-text type="number" v-model="meeting.time"></o-text>
     </div>
     <div>
-      <div class="tw-text-sm py-2">履歴</div>
+      <div class="tw-text-sm py-2">履歴（{{ totalTime }}h）</div>
       <div v-for="(meeting, i) in meetings" :key="i">
         <div>{{ meeting.name }}</div>
         <div class="d-flex align-center">
@@ -38,7 +38,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted } from 'vue';
+import { ref, onMounted, computed } from 'vue';
 import { default as service } from '@/services/meeting';
 import { IMeeting } from '@/types/project';
 
@@ -52,6 +52,15 @@ const meeting = ref<IMeeting>({
   name: '',
   date: '',
   time: 0,
+});
+
+const totalTime = computed(() => {
+  if (!Array.isArray(meetings.value)) {
+    return 0;
+  }
+  return meetings.value.reduce(function (sum, element) {
+    return sum + element.time;
+  }, 0);
 });
 
 onMounted(async () => {

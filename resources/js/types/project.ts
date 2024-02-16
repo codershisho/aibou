@@ -3,9 +3,25 @@ export interface IProject {
   code: string;
   name: string;
   partner_id: number;
-  dates: string;
+  dates: string | null;
   status: number;
-  step: string;
+  step: string | null;
+  agreement_path: string | null;
+  price: number;
+  partner: Partner;
+}
+
+interface Partner {
+  id: number;
+  name: string;
+  organization_type: number;
+  basic_contract_flag: boolean;
+  contact_person: string;
+  contact: string;
+  rating: number;
+  specialty: string;
+  memo: string;
+  organization_type_name: string;
 }
 
 export interface IWorktime {

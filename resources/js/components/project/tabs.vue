@@ -1,6 +1,6 @@
 <template>
   <div class="tw-flex tw-flex-row-reverse tw-gap-5">
-    <div class="tw-w-1/6 tabs-header tw-rounded-xl">
+    <div class="tw-w-1/6 tabs-header tw-rounded-xl tw-cursor-pointer">
       <div
         v-for="(tab, i) in tabs"
         :key="i"
@@ -8,7 +8,7 @@
         :class="[selectedIndex === i ? 'bg-primary' : 'bg-back-lighten-2']"
         @click="changeTab(i)"
       >
-        <v-icon> {{ tab.icon }} </v-icon>
+        <v-icon class="pr-4"> {{ tab.icon }} </v-icon>
         {{ tab.name }}
       </div>
     </div>
@@ -36,11 +36,11 @@ const props = defineProps({
 
 const tab = ref('projectDetail');
 const tabs = ref([
-  { name: '詳細', icon: 'mdi-account-outline' },
-  { name: '工数', icon: 'mdi-account-outline' },
+  { name: '詳細', icon: 'mdi-details' },
+  { name: '工数', icon: 'mdi-clock-time-eight-outline' },
   { name: 'KPT', icon: 'mdi-account-outline' },
-  { name: '契約', icon: 'mdi-account-outline' },
-  { name: '会議', icon: 'mdi-account-outline' },
+  { name: '契約', icon: 'mdi-text-box-multiple-outline' },
+  { name: '会議', icon: 'mdi-laptop-account' },
 ]);
 const selectedIndex = ref(0);
 

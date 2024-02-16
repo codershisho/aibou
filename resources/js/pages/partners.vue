@@ -17,7 +17,7 @@
           </div>
         </div>
         <div class="tw-flex tw-justify-center">
-          <v-rating hover :length="5" :size="32" :model-value="3" active-color="primary" />
+          <v-rating hover :length="5" :size="32" v-model="partner.rating" active-color="primary" />
         </div>
       </v-card>
     </div>
