@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Api;
 
 use App\Models\Project;
 use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\Storage;
 
 class ProjectApi extends ApiController
 {
@@ -35,6 +37,48 @@ class ProjectApi extends ApiController
     {
         $project = Project::findOrFail($id);
         $project->update($request->all());
+        return $this->setResponse($project->step, "保存しました");
+    }
+
+    /**
+     * プロジェクトIDに紐づく契約書と金額を返す
+     *
+     * @param [type] $id
+     * @return void
+     */
+    public function showAgreement($id)
+    {
+        $project = Project::findOrFail($id);
+        $data = [
+            'id' => $project->id,
+            'agreement_path' => $project->agreement_path,
+            'price' => $project->price,
+        ];
+        return $this->setResponse($data);
+    }
+
+    /**
+     * プロジェクトIDに紐づく契約書と金額を更新
+     *
+     * @param [type] $id
+     * @return void
+     */
+    public function updateAgreement($id, Request $request)
+    {
+        $project = Project::findOrFail($id);
+
+        if ($request->hasFile('file')) {
+            // $file_name = request()->file->getClientOriginalName();
+            $date = Carbon::now()->format('YmdHis');
+            $fileName = $date . '_個別契約書.pdf';
+            request()->file->storeAs('public/agreement/' . $id, $fileName);
+            $file_path = '/storage/agreement/' . $id . '/' . $fileName;
+            $project->agreement_path = $file_path;
+        }
+
+        $project->price = $request->price;
+        $project->save();
+
         return $this->setResponse($project, "保存しました");
     }
 }

@@ -43,11 +43,14 @@ onMounted(() => {
 });
 
 const search = async () => {
-  text.value = await service.showStep(props.id);
+  const res = await service.showStep(Number(props.id));
+  if (res) {
+    text.value = res;
+  }
 };
 const onSave = async (v: string, h: Promise<string>) => {
-  const res = await service.step(props.id, { step: v });
-  text.value = res.step;
+  const res = await service.step(Number(props.id), { step: v });
+  text.value = res;
   editMode.value = false;
 };
 

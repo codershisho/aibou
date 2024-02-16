@@ -5,6 +5,7 @@ export interface IProject {
   partner_id: number;
   dates: string;
   status: number;
+  step: string;
 }
 
 export interface IWorktime {
@@ -23,4 +24,18 @@ export interface IReflection {
   keep: string;
   problem: string;
   try: string;
+}
+
+export interface IAgreement {
+  id: number;
+  agreement_path: string | null;
+  price: number | null;
+}
+
+export interface IMeeting {
+  id: number;
+  project_id: number;
+  name: string;
+  date: string;
+  time: number;
 }

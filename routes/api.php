@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\MeetingApi;
 use App\Http\Controllers\Api\PartnerApi;
 use App\Http\Controllers\Api\ProjectApi;
 use App\Http\Controllers\Api\ReflectionApi;
@@ -34,17 +35,32 @@ Route::prefix('aibou')->group(function () {
         Route::get('/', [ProjectApi::class, 'index']);
         Route::prefix('{id}')->group(function () {
             Route::get('/', [ProjectApi::class, 'show']);
-            Route::get('/step', [ProjectApi::class, 'showStep']);
-            Route::put('/step', [ProjectApi::class, 'step']);
+            // ステップ周り
+            Route::prefix('step')->group(function () {
+                Route::get('/', [ProjectApi::class, 'showStep']);
+                Route::put('/', [ProjectApi::class, 'step']);
+            });
+            // 契約周り
+            Route::prefix('agreement')->group(function () {
+                Route::get('/', [ProjectApi::class, 'showAgreement']);
+                Route::post('/', [ProjectApi::class, 'updateAgreement']);
+            });
+            // 工数周り
             Route::prefix('worktime')->group(function () {
                 Route::get('/', [WorktimeApi::class, 'show']);
                 Route::post('/', [WorktimeApi::class, 'store']);
                 Route::put('/{worktime_id}', [WorktimeApi::class, 'update']);
             });
+            // 振り返り周り
             Route::prefix('reflection')->group(function () {
                 Route::get('/', [ReflectionApi::class, 'show']);
                 Route::post('/', [ReflectionApi::class, 'store']);
                 Route::put('/{reflection_id}', [ReflectionApi::class, 'update']);
+            });
+            // 会議周り
+            Route::prefix('meetings')->group(function () {
+                Route::get('/', [MeetingApi::class, 'index']);
+                Route::post('/', [MeetingApi::class, 'store']);
             });
         });
         Route::post('/', [ProjectApi::class, 'store']);

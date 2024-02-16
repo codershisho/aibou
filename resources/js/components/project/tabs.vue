@@ -12,10 +12,12 @@
         {{ tab.name }}
       </div>
     </div>
-    <div class="tw-w-5/6">
+    <div class="tw-w-5/6 tabs-body">
       <projectDetail v-show="tab == `projectDetail`" :id="props.id"></projectDetail>
       <worktime v-show="tab == `worktime`" :id="props.id"></worktime>
       <kpt v-show="tab == `kpt`" :id="props.id"></kpt>
+      <agreement v-show="tab == `agreement`" :id="props.id"></agreement>
+      <meeting v-show="tab == `meeting`" :id="props.id"></meeting>
     </div>
   </div>
 </template>
@@ -25,6 +27,8 @@ import { ref } from 'vue';
 import projectDetail from './details.vue';
 import worktime from './worktime.vue';
 import kpt from './kpt.vue';
+import agreement from './agreement.vue';
+import meeting from './meeting.vue';
 
 const props = defineProps({
   id: String,
@@ -35,6 +39,8 @@ const tabs = ref([
   { name: '詳細', icon: 'mdi-account-outline' },
   { name: '工数', icon: 'mdi-account-outline' },
   { name: 'KPT', icon: 'mdi-account-outline' },
+  { name: '契約', icon: 'mdi-account-outline' },
+  { name: '会議', icon: 'mdi-account-outline' },
 ]);
 const selectedIndex = ref(0);
 
@@ -46,7 +52,14 @@ const changeTab = (tabIndex: number) => {
   } else if (tabIndex == 2) {
     tab.value = 'kpt';
     return;
+  } else if (tabIndex == 3) {
+    tab.value = 'agreement';
+    return;
+  } else if (tabIndex == 4) {
+    tab.value = 'meeting';
+    return;
   }
+
   tab.value = 'projectDetail';
 };
 </script>
@@ -56,5 +69,9 @@ const changeTab = (tabIndex: number) => {
   padding: 8px 16px;
   margin-bottom: 8px;
   border-radius: 4px;
+}
+.tabs-body > div {
+  height: 80vh !important;
+  overflow-y: scroll;
 }
 </style>

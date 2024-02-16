@@ -19,6 +19,8 @@ return new class extends Migration
             $table->string('dates')->nullable()->comment('対応期間');
             $table->integer('status')->nullable()->comment('ステータス');
             $table->text('step')->nullable()->comment('ステップテキスト');
+            $table->text('agreement_path')->nullable()->comment('個別契約書のパス');
+            $table->integer('price')->nullable()->default(0)->comment('契約単価');
             $table->timestamps();
             $table->softDeletes();
         });

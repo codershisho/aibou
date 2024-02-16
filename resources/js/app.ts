@@ -30,6 +30,10 @@ import AxiosPlugin from './plugins/axios';
 import { createPinia } from 'pinia';
 const pinia = createPinia();
 
+// libs
+import VueDatePicker from '@vuepic/vue-datepicker';
+import '@vuepic/vue-datepicker/dist/main.css';
+
 // components
 import pageTitle from '@/components/commons/pageTitle.vue';
 import card from '@/components/commons/card.vue';
@@ -52,6 +56,8 @@ app.use(vuetify);
 app.use(router);
 app.use(AxiosPlugin);
 app.use(pinia);
+
+app.component('VueDatePicker', VueDatePicker);
 
 app.component('page-title', pageTitle);
 app.component('o-card', card);

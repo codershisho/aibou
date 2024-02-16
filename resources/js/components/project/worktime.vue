@@ -5,23 +5,23 @@
     </div>
     <div>
       <div class="tw-text-sm py-2">提出工数</div>
-      <o-text v-model="worktime.submission_work_hours"></o-text>
+      <o-text type="number" v-model="worktime.submission_work_hours"></o-text>
     </div>
     <div>
       <div class="tw-text-sm py-2">提出MTG工数</div>
-      <o-text v-model="worktime.submission_meeting_hours"></o-text>
+      <o-text type="number" v-model="worktime.submission_meeting_hours"></o-text>
     </div>
     <div>
       <div class="tw-text-sm py-2">見積工数</div>
-      <o-text v-model="worktime.estimated_work_hours"></o-text>
+      <o-text type="number" v-model="worktime.estimated_work_hours"></o-text>
     </div>
     <div>
       <div class="tw-text-sm py-2">実工数</div>
-      <o-text v-model="worktime.actual_work_hours"></o-text>
+      <o-text type="number" v-model="worktime.actual_work_hours"></o-text>
     </div>
     <div>
       <div class="tw-text-sm py-2">実MTG工数</div>
-      <o-text v-model="worktime.actual_meeting_hours"></o-text>
+      <o-text type="number" v-model="worktime.actual_meeting_hours"></o-text>
     </div>
   </o-card>
 </template>
