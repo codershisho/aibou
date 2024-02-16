@@ -11,6 +11,9 @@ const ProjectApiService = {
   store: async (params: any) => {
     return await axios.post('/projects', params);
   },
+  update: async (id: number, params: any): Promise<IProject> => {
+    return await axios.put(`/projects/${id}`, params);
+  },
   showStep: async (id: number): Promise<string | null> => {
     return await axios.get(`/projects/${id}/step`);
   },

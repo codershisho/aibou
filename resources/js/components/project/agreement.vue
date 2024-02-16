@@ -4,15 +4,7 @@
       <o-savebtn @click="fileUpload">保存する</o-savebtn>
     </div>
     <div>
-      <input type="file" accept="application/pdf" @change="fileSelected" />
-    </div>
-    <div>
-      <div class="tw-text-sm py-2">単価</div>
-      <o-text type="number" v-model="agreement.price"></o-text>
-    </div>
-    <div>
       <div class="tw-text-sm py-2">個別契約書</div>
-      <div v-html="agreement.agreement_path ? `アップ済み` : `未`"></div>
       <v-btn
         color="primary"
         variant="flat"
@@ -23,6 +15,29 @@
       >
         参照
       </v-btn>
+      <input type="file" accept="application/pdf" @change="fileSelected" />
+    </div>
+    <div>
+      <div class="tw-text-sm py-2">見積書</div>
+      <v-btn
+        color="primary"
+        variant="flat"
+        rounded="1"
+        prepend-icon="mdi:mdi-arrow-up-bold-circle-outline"
+        :disabled="!isUploadedEstimate"
+        @click="readEstimate"
+      >
+        参照
+      </v-btn>
+      <input type="file" accept="application/pdf" @change="estimateSelected" />
+    </div>
+    <div>
+      <div class="tw-text-sm py-2">単価</div>
+      <o-text v-model="agreement.price"></o-text>
+    </div>
+    <div>
+      <div class="tw-text-sm py-2">契約金額</div>
+      <o-text v-model="agreement.money"></o-text>
     </div>
   </o-card>
 </template>
@@ -35,15 +50,24 @@ import { IAgreement } from '@/types/project';
 const props = defineProps({
   id: String,
 });
-const fileInfo = ref('');
+const agreementFile = ref('');
+const estimateFile = ref('');
 const agreement = ref<IAgreement>({
   id: 0,
   agreement_path: null,
+  estimate_path: null,
   price: 0,
+  money: 0,
 });
 
 const isUploaded = computed(() => {
   if (agreement.value.agreement_path != null && agreement.value.agreement_path != '') {
+    return true;
+  }
+  return false;
+});
+const isUploadedEstimate = computed(() => {
+  if (agreement.value.estimate_path != null && agreement.value.estimate_path != '') {
     return true;
   }
   return false;
@@ -59,21 +83,29 @@ const search = async () => {
 };
 
 const fileSelected = async (event: any) => {
-  fileInfo.value = event.target.files[0];
+  agreementFile.value = event.target.files[0];
+};
+const estimateSelected = async (event: any) => {
+  estimateFile.value = event.target.files[0];
 };
 
 const fileUpload = async () => {
   const formData = new FormData();
-  formData.append('file', fileInfo.value);
+  formData.append('file', agreementFile.value);
+  formData.append('file2', estimateFile.value);
   formData.append('id', String(agreement.value.id));
   formData.append('price', String(agreement.value.price));
+  formData.append('money', String(agreement.value.money));
 
-  await service.updateAgreement(Number(props.id), formData);
-  fileInfo.value = '';
+  agreement.value = await service.updateAgreement(Number(props.id), formData);
+  agreementFile.value = '';
 };
 
 const read = () => {
   window.open(import.meta.env.VITE_APP_URL + agreement.value.agreement_path, '_blank');
+};
+const readEstimate = () => {
+  window.open(import.meta.env.VITE_APP_URL + agreement.value.estimate_path, '_blank');
 };
 </script>
 

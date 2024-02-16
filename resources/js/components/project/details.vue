@@ -1,5 +1,8 @@
 <template>
   <o-card title="案件詳細">
+    <div class="text-right">
+      <o-savebtn @click="onSave">保存する</o-savebtn>
+    </div>
     <div>
       <div class="tw-text-sm py-2">案件コード</div>
       <o-text v-model="project.code"></o-text>
@@ -58,9 +61,20 @@ const statuses = ref([
 ]);
 
 onMounted(async () => {
-  project.value = await pService.show(props.id);
+  project.value = await pService.show(Number(props.id));
   partners.value = await service.index();
 });
+
+const onSave = async () => {
+  const params = {
+    code: project.value.code,
+    name: project.value.name,
+    partner_id: project.value.partner_id,
+    dates: project.value.dates,
+    status: project.value.status,
+  };
+  project.value = await pService.update(Number(props.id), params);
+};
 </script>
 
 <style scoped></style>

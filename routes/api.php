@@ -72,7 +72,7 @@ Route::prefix('aibou')->group(function () {
             });
         });
         Route::post('/', [ProjectApi::class, 'store']);
-        // Route::put('/{id}', [PartnerApi::class, 'update']);
+        Route::put('/{id}', [ProjectApi::class, 'update']);
         // Route::delete('/{id}', [PartnerApi::class, 'destroy']);
     });
 });

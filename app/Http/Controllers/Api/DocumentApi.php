@@ -21,13 +21,10 @@ class DocumentApi extends ApiController
 
     public function upload($id, Request $request)
     {
-        // $document = Document::findOrFail($id);
         $document = new Document();
         $document->partner_id = $id;
         if ($request->hasFile('file')) {
-            // $file_name = request()->file->getClientOriginalName();
-            $date = Carbon::now()->format('YmdHis');
-            $fileName = $date . '_基本契約書.pdf';
+            $fileName = request()->file->getClientOriginalName();
             request()->file->storeAs('public/basic/' . $id, $fileName);
             $file_path = '/storage/basic/' . $id . '/' . $fileName;
             $document->basic_path = $file_path;

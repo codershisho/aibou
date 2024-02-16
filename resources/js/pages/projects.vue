@@ -21,8 +21,10 @@
           <th>案件コード</th>
           <th>案件名</th>
           <th>外部委託先</th>
+          <th>ステータス</th>
           <th>期間</th>
-          <th>金額</th>
+          <th>単価</th>
+          <th>契約金額</th>
         </tr>
       </thead>
       <tbody>
@@ -31,8 +33,10 @@
           <td>{{ project.code }}</td>
           <td>{{ project.name }}</td>
           <td>{{ project.partner.name }}</td>
+          <td>{{ project.status_name }}</td>
           <td>{{ project.dates }}</td>
           <td>{{ project.price }}</td>
+          <td>{{ project.money }}</td>
         </tr>
       </tbody>
     </v-table>

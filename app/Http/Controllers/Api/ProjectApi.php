@@ -27,6 +27,13 @@ class ProjectApi extends ApiController
         return response()->json($project, 201);
     }
 
+    public function update($id, Request $request)
+    {
+        $project = Project::findOrFail($id);
+        $project->update($request->all());
+        return $this->setResponse($project, "案件更新しました");
+    }
+
     public function showStep($id)
     {
         $project = Project::findOrFail($id);
@@ -52,7 +59,9 @@ class ProjectApi extends ApiController
         $data = [
             'id' => $project->id,
             'agreement_path' => $project->agreement_path,
+            'estimate_path' => $project->estimate_path,
             'price' => $project->price,
+            'money' => $project->money,
         ];
         return $this->setResponse($data);
     }
@@ -68,15 +77,20 @@ class ProjectApi extends ApiController
         $project = Project::findOrFail($id);
 
         if ($request->hasFile('file')) {
-            // $file_name = request()->file->getClientOriginalName();
-            $date = Carbon::now()->format('YmdHis');
-            $fileName = $date . '_個別契約書.pdf';
+            $fileName = request()->file->getClientOriginalName();
             request()->file->storeAs('public/agreement/' . $id, $fileName);
             $file_path = '/storage/agreement/' . $id . '/' . $fileName;
             $project->agreement_path = $file_path;
         }
+        if ($request->hasFile('file2')) {
+            $fileName = request()->file->getClientOriginalName();
+            request()->file2->storeAs('public/estimate/' . $id, $fileName);
+            $file_path = '/storage/estimate/' . $id . '/' . $fileName;
+            $project->estimate_path = $file_path;
+        }
 
         $project->price = $request->price;
+        $project->money = $request->money;
         $project->save();
 
         return $this->setResponse($project, "保存しました");

@@ -20,7 +20,9 @@ return new class extends Migration
             $table->integer('status')->nullable()->comment('ステータス');
             $table->text('step')->nullable()->comment('ステップテキスト');
             $table->text('agreement_path')->nullable()->comment('個別契約書のパス');
+            $table->text('estimate_path')->nullable()->comment('見積書のパス');
             $table->integer('price')->nullable()->default(0)->comment('契約単価');
+            $table->integer('money')->nullable()->default(0)->comment('契約金額');
             $table->timestamps();
             $table->softDeletes();
         });

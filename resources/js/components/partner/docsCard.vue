@@ -46,6 +46,7 @@ const fileUpload = async () => {
   const formData = new FormData();
   formData.append('file', fileInfo.value);
   document.value = await service.uploadBasic(Number(props.id), formData);
+  await search();
   fileInfo.value = '';
 };
 
