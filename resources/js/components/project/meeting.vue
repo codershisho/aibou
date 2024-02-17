@@ -26,10 +26,12 @@
     <div>
       <div class="tw-text-sm py-2">履歴（{{ totalTime }}h）</div>
       <div v-for="(meeting, i) in meetings" :key="i">
-        <div>{{ meeting.name }}</div>
         <div class="d-flex align-center">
-          <div class="tw-w-1/2">{{ meeting.date }}</div>
-          <div class="tw-w-1/2">{{ meeting.time }}</div>
+          <div class="tw-w-1/2 tw-text-sm">{{ meeting.date }}</div>
+          <div class="tw-w-1/3">
+            <v-chip color="accent" label variant="flat">{{ meeting.name }}</v-chip>
+          </div>
+          <div class="tw-w-1/2 tw-text-sm">{{ meeting.time }}h</div>
         </div>
         <v-divider class="my-2"></v-divider>
       </div>

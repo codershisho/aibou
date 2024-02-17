@@ -8,9 +8,9 @@ use Illuminate\Support\Carbon;
 
 class DocumentApi extends ApiController
 {
-    public function index()
+    public function index($id)
     {
-        $documents = Document::all();
+        $documents = Document::where('partner_id', $id)->get();
         $documents = $documents->map(function ($document) {
             $fileName = basename($document->basic_path);
             $document->fileName = $fileName;

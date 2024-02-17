@@ -3,7 +3,14 @@
     <div class="text-right mb-5">
       <o-savebtn @click="onClick">編集する</o-savebtn>
     </div>
-    <MdEditor v-if="editMode" theme="dark" v-model="text" language="jp_JP" @onSave="onSave" />
+    <MdEditor
+      v-if="editMode"
+      theme="dark"
+      previewTheme="github"
+      v-model="text"
+      language="jp_JP"
+      @onSave="onSave"
+    />
     <MdPreview
       v-if="!editMode"
       theme="dark"
@@ -59,4 +66,8 @@ const onClick = () => {
 };
 </script>
 
-<style scoped></style>
+<style>
+.github-theme p {
+  margin-bottom: 8px !important;
+}
+</style>
