@@ -67,6 +67,21 @@ const onClick = () => {
 </script>
 
 <style>
+.md-editor-preview-wrapper,
+.md-editor-input-wrapper .ͼo {
+  background-color: rgb(66, 66, 66);
+  font-family: 'Noto Sans JP', sans-serif;
+}
+.github-theme {
+  background-color: rgb(66, 66, 66);
+  color: rgb(255, 255, 255);
+  font-family: 'Noto Sans JP', sans-serif;
+  --md-theme-table-td-border-color: white !important;
+}
+.ͼo {
+  color: rgb(255, 255, 255);
+  font-family: 'Noto Sans JP', sans-serif;
+}
 .github-theme p {
   margin-bottom: 8px !important;
 }
