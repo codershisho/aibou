@@ -14,19 +14,13 @@
         ファイル選択
       </v-btn>
       <div class="tw-text-sm py-2">{{ file1Name }}</div>
-      <input
-        style="display: none"
-        ref="file1"
-        type="file"
-        accept="application/pdf"
-        @change="fileSelected"
-      />
+      <input style="display: none" ref="file1" type="file" @change="fileSelected" />
       <v-divider class="my-2"></v-divider>
       <div class="tw-text-sm py-2">履歴</div>
-      <div v-for="(document, i) in documents" :key="i" class="d-flex align-center tw-border-b-2">
+      <div v-for="(doc, i) in documents" :key="i" class="d-flex align-center tw-border-b-2">
         <div class="tw-w-1/12 tw-text-right pr-3">{{ i }}：</div>
-        <div class="tw-w-11/12 py-2 tw-cursor-pointer" @click="read(document)">
-          {{ document.fileName }}
+        <div class="tw-w-11/12 py-2 tw-cursor-pointer" @click="read(doc)">
+          {{ doc.fileName }}
         </div>
       </div>
     </div>
@@ -34,6 +28,7 @@
 </template>
 
 <script setup lang="ts">
+import axios from 'axios';
 import { ref, onMounted, computed } from 'vue';
 import { default as service } from '@/services/partner';
 import { IDocument } from '@/types/partner';
@@ -45,7 +40,7 @@ const file1 = ref();
 const file1Name = ref('');
 const fileInfo = ref('');
 const documents = ref<IDocument[]>();
-const document = ref<IDocument>({
+const doc = ref<IDocument>({
   id: 0,
   partner_id: 0,
   basic_path: '',
@@ -69,14 +64,27 @@ const fileSelected = async (event: any) => {
 const fileUpload = async () => {
   const formData = new FormData();
   formData.append('file', fileInfo.value);
-  document.value = await service.uploadBasic(Number(props.id), formData);
+  doc.value = await service.uploadBasic(Number(props.id), formData);
   await search();
   fileInfo.value = '';
   file1Name.value = '';
 };
 
-const read = (document: IDocument) => {
-  window.open(import.meta.env.VITE_APP_URL + document.basic_path, '_blank');
+const read = async (doc: IDocument) => {
+  axios({
+    url: `/partners/${props.id}/documents/download/${doc.fileName}`,
+    method: 'GET',
+    responseType: 'blob', // important
+  }).then((response) => {
+    const blob = new Blob([response.data], { type: response.headers['content-type'] });
+    const link = document.createElement('a');
+    link.href = URL.createObjectURL(blob);
+    link.download = doc.fileName;
+    link.click();
+    URL.revokeObjectURL(link.href);
+  });
+
+  // window.location = res;
 };
 const selectFile = () => {
   file1.value.click();

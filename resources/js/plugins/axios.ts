@@ -25,6 +25,10 @@ const axiosPlugin = {
             },
           });
         }
+        if (response.request.responseType == 'blob') {
+          return response;
+        }
+
         return response.data.data;
       },
       (error: any) => {

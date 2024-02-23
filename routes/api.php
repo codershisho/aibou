@@ -36,6 +36,7 @@ Route::prefix('aibou')->group(function () {
             Route::prefix('documents')->group(function () {
                 Route::get('/', [DocumentApi::class, 'index']);
                 Route::post('/', [DocumentApi::class, 'upload']);
+                Route::get('/download/{file_name}', [DocumentApi::class, 'download']);
             });
         });
     });

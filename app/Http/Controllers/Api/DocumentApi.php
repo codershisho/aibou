@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Models\Document;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\File;
 
 class DocumentApi extends ApiController
 {
@@ -31,5 +32,23 @@ class DocumentApi extends ApiController
         }
         $document->save();
         return $this->setResponse($document, "保存しました");
+    }
+
+    public function download($id, $file_name)
+    {
+        $file_path = storage_path('app/public/basic/' . $id . '/' .  $file_name);
+        if (file_exists($file_path)) {
+            // Fileのタイプと名前をセットします。
+            $headers = array(
+                'Content-Type: ' . File::mimeType($file_path),
+                'Content-Disposition: attachment; filename="' . basename($file_path) . '"',
+            );
+
+            // ダウンロードを開始します。
+            return response()->download($file_path, basename($file_path), $headers);
+        } else {
+            // ファイルが存在しない場合は、404エラーを返します。
+            abort(404);
+        }
     }
 }
