@@ -53,6 +53,7 @@ Route::prefix('aibou')->group(function () {
             Route::prefix('agreement')->group(function () {
                 Route::get('/', [ProjectApi::class, 'showAgreement']);
                 Route::post('/', [ProjectApi::class, 'updateAgreement']);
+                Route::get('/download/{file_name}', [ProjectApi::class, 'downloadAgreement']);
             });
             // 工数周り
             Route::prefix('worktime')->group(function () {

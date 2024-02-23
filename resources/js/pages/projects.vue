@@ -33,7 +33,13 @@
           <td>{{ project.code }}</td>
           <td>{{ project.name }}</td>
           <td>{{ project.partner.name }}</td>
-          <td>{{ project.status_name }}</td>
+          <td>
+            <v-chip class="w-50" :color="chipColor(project.status)" label variant="flat">
+              <div class="text-center">
+                {{ project.status_name }}
+              </div>
+            </v-chip>
+          </td>
           <td>{{ project.dates }}</td>
           <td>{{ project.price }}</td>
           <td>{{ project.money }}</td>
@@ -63,6 +69,18 @@ const search = async () => {
   projects.value = await pService.index();
 };
 
+const chipColor = (status_id: number) => {
+  switch (status_id) {
+    case 2:
+      return 'green';
+    case 3:
+      return 'brown';
+    case 4:
+      return 'blue-grey';
+    default:
+      return 'primary';
+  }
+};
 const filteredProjects = computed(() => {
   if (projects.value.length === 0) {
     return [];

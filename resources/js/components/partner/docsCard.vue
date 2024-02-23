@@ -17,11 +17,8 @@
       <input style="display: none" ref="file1" type="file" @change="fileSelected" />
       <v-divider class="my-2"></v-divider>
       <div class="tw-text-sm py-2">履歴</div>
-      <div v-for="(doc, i) in documents" :key="i" class="d-flex align-center tw-border-b-2">
-        <div class="tw-w-1/12 tw-text-right pr-3">{{ i }}：</div>
-        <div class="tw-w-11/12 py-2 tw-cursor-pointer" @click="read(doc)">
-          {{ doc.fileName }}
-        </div>
+      <div v-for="(doc, i) in documents" :key="i" class="tw-border-b-2 tw-text-blue-400 py-2 pl-2">
+        <div class="tw-cursor-pointer" @click="read(doc)">{{ i }} : {{ doc.fileName }}</div>
       </div>
     </div>
   </o-card>

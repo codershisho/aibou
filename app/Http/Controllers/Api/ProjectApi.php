@@ -6,9 +6,12 @@ use App\Models\Project;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\File;
 
 class ProjectApi extends ApiController
 {
+    const UPLOAD_FILE_PATH = "public/projects/";
+
     public function index()
     {
         $data = Project::with(['partner'])->get();
@@ -56,10 +59,16 @@ class ProjectApi extends ApiController
     public function showAgreement($id)
     {
         $project = Project::findOrFail($id);
+        $files = Storage::disk('public')->files('projects/' . $id);
+        $fileNames = [];
+
+        foreach ($files as $file) {
+            $fileNames[] = basename($file);
+        }
+
         $data = [
             'id' => $project->id,
-            'agreement_path' => $project->agreement_path,
-            'estimate_path' => $project->estimate_path,
+            'file_names' => $fileNames,
             'price' => $project->price,
             'money' => $project->money,
         ];
@@ -78,21 +87,47 @@ class ProjectApi extends ApiController
 
         if ($request->hasFile('file')) {
             $fileName = request()->file->getClientOriginalName();
-            request()->file->storeAs('public/agreement/' . $id, $fileName);
-            $file_path = '/storage/agreement/' . $id . '/' . $fileName;
-            $project->agreement_path = $file_path;
-        }
-        if ($request->hasFile('file2')) {
-            $fileName = request()->file->getClientOriginalName();
-            request()->file2->storeAs('public/estimate/' . $id, $fileName);
-            $file_path = '/storage/estimate/' . $id . '/' . $fileName;
-            $project->estimate_path = $file_path;
+            request()->file->storeAs(self::UPLOAD_FILE_PATH . $id, $fileName);
         }
 
         $project->price = $request->price;
         $project->money = $request->money;
         $project->save();
 
+        $files = Storage::disk('public')->files('projects/' . $id);
+        $fileNames = [];
+
+        foreach ($files as $file) {
+            $fileNames[] = basename($file);
+        }
+
+        $project->file_names = $fileNames;
+
         return $this->setResponse($project, "保存しました");
+    }
+
+    /**
+     * アップロードされた書類のダウンロード
+     *
+     * @param [type] $id
+     * @param [type] $file_name
+     * @return void
+     */
+    public function downloadAgreement($id, $file_name)
+    {
+        $file_path = storage_path('app/public/projects/' . $id . '/' .  $file_name);
+        if (file_exists($file_path)) {
+            // Fileのタイプと名前をセットします。
+            $headers = array(
+                'Content-Type: ' . File::mimeType($file_path),
+                'Content-Disposition: attachment; filename="' . basename($file_path) . '"',
+            );
+
+            // ダウンロードを開始します。
+            return response()->download($file_path, basename($file_path), $headers);
+        } else {
+            // ファイルが存在しない場合は、404エラーを返します。
+            abort(404);
+        }
     }
 }

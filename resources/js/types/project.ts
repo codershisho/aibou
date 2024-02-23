@@ -7,7 +7,6 @@ export interface IProject {
   status: number;
   status_name: string;
   step: string | null;
-  agreement_path: string | null;
   price: number;
   money: number;
   partner: Partner;
@@ -46,8 +45,7 @@ export interface IReflection {
 
 export interface IAgreement {
   id: number;
-  agreement_path: string | null;
-  estimate_path: string | null;
+  file_names: string | null;
   price: number | null;
   money: number | null;
 }
