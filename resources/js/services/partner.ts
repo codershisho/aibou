@@ -8,6 +8,9 @@ const PartnerApiService = {
   show: async (id: number): Promise<IPartner> => {
     return await axios.get(`/partners/${id}`);
   },
+  store: async (params: any): Promise<IPartner> => {
+    return await axios.post(`/partners`, params);
+  },
   update: async (id: number, params: any): Promise<IPartner> => {
     return await axios.put(`/partners/${id}`, params);
   },

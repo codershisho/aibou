@@ -1,5 +1,10 @@
 <template>
   <page-title>外部委託先一覧</page-title>
+  <div class="tw-flex tw-items-center mb-5">
+    <div class="ml-auto text-right">
+      <o-newbtn class="text-right" @click="onNew">新規作成</o-newbtn>
+    </div>
+  </div>
   <div class="tw-flex tw-flex-wrap">
     <div v-for="(partner, i) in partners" :key="i" class="tw-w-1/6 px-2 pb-6">
       <v-card class="pa-4 bg-back-lighten-2 partner-card" :to="'/partners/' + partner.id">
@@ -22,6 +27,7 @@
       </v-card>
     </div>
   </div>
+  <o-dialog v-model="dialog" title="外部委託先登録" form="partner-form" @close="close" />
 </template>
 
 <script setup lang="ts">
@@ -30,10 +36,23 @@ import { default as service } from '@/services/partner';
 import { IPartner } from '@/types/partner';
 
 const partners = ref<IPartner[] | null>();
+const dialog = ref(false);
 
 onMounted(async () => {
-  partners.value = await service.index();
+  search();
 });
+
+const search = async () => {
+  partners.value = await service.index();
+};
+
+const onNew = () => {
+  dialog.value = true;
+};
+
+const close = () => {
+  search();
+};
 </script>
 
 <style scoped>

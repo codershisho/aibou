@@ -49,6 +49,7 @@ import snackbar from '@/components/ui/snackbar.vue';
 
 // forms
 import projectForm from '@/components/projects/projectForm.vue';
+import partnerForm from '@/components/partners/partnerForm.vue';
 
 const app = createApp(App);
 
@@ -73,5 +74,6 @@ app.component('o-snackbar', snackbar);
 
 // forms
 app.component('project-form', projectForm);
+app.component('partner-form', partnerForm);
 
 app.mount('#app');
